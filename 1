@@ -34,47 +34,56 @@ eat(self, food) - метод, где food - это параметр, прини�
 """
 
 
-class Animal: #Класс Животное
-    alive = True #Атрибут Живой
-    fed = False  #Атрибут Накормленный
+class Animal:  # Класс Животное
+    alive = True  # Живой
+    fed = False  # накормленный
 
     def __init__(self, name):
-        self.name = name #Индивидуальное название каждого животного
+        self.name = name
 
-
-class Plant:#Класс Растение
-    edible = False #Cъедобность
-
-    def __init__(self, name):
-        self.name = name #Индивидуальное название каждого растения
-
-
-class Mammal(Animal): #Класс Мамал(наследник класса Animal)
     def eat(self, food):
         if food.edible:
             print(f'{self.name} съел {food.name}')
-            self.fed = True
+            Animal.fed = True
         else:
-            print(f'{self.name} не стал есть{food.name}')
-            self.alive = False
+            print(f'{self.name} не стал есть {food.name}')
+            Animal.alive = False
 
 
-class Predator(Animal): #Класс Predator (наследник класса Аnimal)
-    def eat(self, food):
-        if food.edible:
-            print(f'{self.name} съел {food.name}')
-            self.fed = True
-        else:
-            print(f'{self.name} не стал есть{food.name}')
-            self.alive = False
+class Mammal(Animal):
+    pass
 
 
-class Fruit(Plant): #Класс Fruit, наследник класса Plant
-    edible = True # Аттрибут edible, согласно условиям
+class Predator(Animal):
+    pass
+
+
+class Plant:
+    edible = False  # съедобность
+
+    def __init__(self, name):
+        self.name = name
+
+
+class Fruit(Plant):
+    edible = True  # съедобность
 
 
 class Flower(Plant):
     pass
 
-a1=Predator('Волк с Уолл-Стрит')
-a2=Mammal('Хатико')
+
+a1 = Predator('Волк с Уолл-Стрит')
+a2 = Mammal('Хатико')
+p1 = Flower('Цветик семицветик')
+p2 = Fruit('Заводной апельсин')
+
+print(a1.name)
+print(p1.name)
+
+print(a1.alive)
+print(a2.fed)
+a1.eat(p1)
+a2.eat(p2)
+print(a1.alive)
+print(a2.fed)
